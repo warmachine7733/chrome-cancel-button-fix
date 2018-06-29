@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        .file {
+            position: fixed;
+            left: 100px;
+            top: 10px;
+        }
+
+        .button {
+            position: fixed;
+            left: 400px;
+            top: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <input type="file" class="file" onchange="changeFile(event)" onclick="clickFile(event)" id="file" />
+    <div id="log" style="display:none"></div>
+    <ul id="ul">
+    </ul>
+    <br/>
+    <br/>
+    <input type="button" class="button" onclick="removeFile()" value="remove" />
+
+    <script>
+        var clone = {}
+        function changeFile(event) {
+
+            var fileElement = event.target;
+            if (fileElement.value == "") {
+                var file = document.getElementById("file")
+                document.body.appendChild(clone[fileElement.id]); //adding clone 
+                file.parentNode.removeChild(file); //removing parent 
+            }
+        }
+
+        function clickFile(event) {
+            console.log("click event is fired")
+            var fileElement = event.target;
+            if (fileElement.value != "") {
+                clone[fileElement.id] = fileElement.cloneNode(true); //cpoying clone
+            }
+
+        }
+
+        function removeFile() {
+            document.getElementById("file").value = "";
+        }
+    </script>
+
+</html>
